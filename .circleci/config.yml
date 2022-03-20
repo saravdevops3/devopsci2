@@ -39,6 +39,7 @@ jobs:
       - run:
           name: Install dependancies
           command: |
+            pipenv install
             python3 -m venv venv
             . venv/bin/activiate
             pip install -r requirements.txt
