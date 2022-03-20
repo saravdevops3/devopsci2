@@ -22,6 +22,7 @@ jobs:
     # Change the version below to your required version of python
     docker:
       - image: cimg/python:3.10.2
+    resource_class: small
       
     working_directory: ~/devopsci2
     # Checkout the code as the first step. This is a dedicated CircleCI step.
