@@ -37,12 +37,20 @@ jobs:
           # app-dir: ~/project/package-directory/  # If you're requirements.txt isn't in the root directory.
           # pip-dependency-file: test-requirements.txt  # if you have a different name for your requirements file, maybe one that combines your runtime and test requirements.
       - run:
+          name: Install dependancies
+          command: |
+            pipenv install
+            python3 -m venv venv
+            . venv/bin/activiate
+            pip install -r requirements.txt
+      #3 Run coding convention software and also tester
+      - run:
           name: Run Tests
           command: |
-            flake8 --statistics
+            . venv/bin/activate
+            flake8 --exclude=env*  --statistics
             pytest --junixml=test-results/junit.xml
-          
-            #3 Run coding convention software plus tester.
+           
       - store_test_results:
           path: test-results
       - store_artifacts:
@@ -55,4 +63,3 @@ workflows:
     # Inside the workflow, you define the jobs you want to run.
     jobs:
       - build-and-test
-
